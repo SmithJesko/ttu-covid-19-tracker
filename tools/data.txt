@@ -1,0 +1,7 @@
+2020-08-20 18:19:47.449074
+<h4>ACTIVE COVID-19 POSITIVE CASES</h4><em>Reported in Lubbock, TX Campus as of August 19, 2020</em>
+[]
+['', 'Students', 'Faculty/Staff', 'Total']
+['Reported Cases', '36', '40', '76']
+['Recovered', '18', '30', '48']
+['Active', '18', '10', '28']
