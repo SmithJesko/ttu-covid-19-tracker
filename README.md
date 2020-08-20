@@ -14,7 +14,7 @@ Made by [Smith Jesko](https://smithjesko.com/)
 - Run the following commands:
 ```bash
 cd $PATH/ttu-covid-19-tracker/src
-pip install -r requirments.txt
+pip3 install -r requirments.txt
 ```
 
 ## Usage
