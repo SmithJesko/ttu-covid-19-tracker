@@ -6,7 +6,7 @@ TTU COVID-19 Case Tracker is a tool that tracks the reported cases of COVID-19 a
 Data pulled from: [TTUHSC](https://www.depts.ttu.edu/communications/emergency/coronavirus/)
 
 Made by [Smith Jesko](https://smithjesko.com/)
-<font color="#999">*Not an official service from Texas Tech University</font>
+*Not an official service from Texas Tech University
 
 ## Installation
 - Clone the Repo: ```git clone https://github.com/SmithJesko/ttu-covid-19-tracker.git```
