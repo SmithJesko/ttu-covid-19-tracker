@@ -4,6 +4,7 @@
 TTU COVID-19 Case Tracker is a tool that tracks the reported cases of COVID-19 at Texas Tech University. Reported cases are posted regularly. Case counts are based on self-reports to TTUHSC and include information allowed according to student and employee confidentiality laws.
 
 Data pulled from: [TTUHSC](https://www.depts.ttu.edu/communications/emergency/coronavirus/)
+Data collection started on: 08/19/2020
 
 Made by [Smith Jesko](https://smithjesko.com/)
 *Not an official service from Texas Tech University
