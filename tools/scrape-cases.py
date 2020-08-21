@@ -8,8 +8,6 @@ url = 'https://www.depts.ttu.edu/communications/emergency/coronavirus/'
 x = requests.get(url)
 soup = BeautifulSoup(x.content, 'html.parser')
 
-row_titles = []
-
 # table = soup.table
 # table = soup.findAll('table')
 # student_rows = table[0].findAll('tr')
