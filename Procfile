@@ -1,1 +1,1 @@
-web: gunicorn ttu-covid-19-tracker.wsgi
+web: gunicorn ttucovid19tracker.wsgi
