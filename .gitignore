@@ -1,4 +1,5 @@
 .git
 .vscode
 src/env/*
+db.sqlite3
 src/db.sqlite3
