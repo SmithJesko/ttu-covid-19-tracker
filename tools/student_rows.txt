@@ -1,5 +1,0 @@
-2020-08-20 15:36:49.164078
-['\xa0', 'Abilene', 'Amarillo', 'Dallas', 'Lubbock', 'Permian Basin', 'Distance', 'Total']
-['Reported Cases', '3', '1', '3', '28', '8', '17', '60']
-['Recovered', '3', '1', '3', '26', '8', '15', '56']
-['Active', '0', '0', '0', '2', '0', '2', '4']
