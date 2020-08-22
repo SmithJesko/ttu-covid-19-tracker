@@ -1,6 +1,200 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<h1>TTU Covid-19 Tracker</h1>
+<div class="topbar"></div>
+<div class="logo">
+    <img src="{% static 'img/logo-white.png' %}" alt="Logo" id="logo">
+</div>
+<div class="info">
+    <p>
+        TTU COVID-19 Case Tracker is a tool that tracks the reported cases of COVID-19 at Texas Tech University. 
+        Reported cases are posted regularly. Case counts are based on self-reports to TTUHSCand include
+        information allowed according to student and employee confidentiality laws. 
+    </p>
+</div>
+<div class="resources">
+    <h4>Learn more about how to protect yourself from the COVID-19 pandemic from the <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">CDC</a>.</h4>
+</div>
+<div class="wrapper" style="padding-top: 60px;">
+    <div class="charts">
+        <div class="chart-head">
+            <h4 class="red">POSITIVE COVID-19 CASES</h4>
+            <h6>{{ updated }}</h6>
+        </div>
+        <table class="tg">
+            <thead>
+                <tr align="center">
+                    <th class="tg-0lax bold red">{{ date }}</th>
+                    <th class="tg-0lax bold">Students</th>
+                    <th class="tg-0lax bold">Faculty/Staff</th>
+                    <th class="tg-0lax bold">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr align="center">
+                    <td class="tg-0lax">Reported Cases</td>
+                    <td class="tg-0lax">{{ students_reported }}</td>
+                    <td class="tg-0lax">{{ faculty_reported }}</td>
+                    <td class="tg-0lax">{{ total_reported }}</td>
+                </tr>
+                <tr align="center">
+                    <td class="tg-0lax">Recovered</td>
+                    <td class="tg-0lax">{{ students_recovered }}</td>
+                    <td class="tg-0lax">{{ students_recovered }}</td>
+                    <td class="tg-0lax">{{ total_recovered }}</td>
+                </tr>
+                <tr align="center">
+                    <td class="tg-0lax">Active</td>
+                    <td class="tg-0lax">{{ students_active }}</td>
+                    <td class="tg-0lax">{{ faculty_active }}</td>
+                    <td class="tg-0lax">{{ total_active }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="graphs">
+        <div class="chart-head">
+            <h4 class="red">Weekly Graph of Active Cases</h4>
+            <h6>Total reports of active positive cases from the past seven days</h6>
+        </div>
+        <div class="canvas-wrapper">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    <div style="padding-bottom: 30px;"></div>
+</div>
+<div style="padding-top: 30px;"></div>
+<div class="map">
+    <h3>Map of Reported COVID-19 Cases in the United States</h3>
+    <div data-post-id="50079" data-site-id="499" data-site-root-folder="coronavirus" class="mb-3 invert" data-host="www.cdc.gov" data-theme="theme-cyan" data-cdc-widget="cdcMaps" data-config-url="/coronavirus/2019-ncov/cases-updates/us-case-count-maps-charts/map-cases-us-CaseOnly_Desktop.json">
+    </div>
+</div>
+<script src="//tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js"></script>
+</iframe>
+<footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            Not affiliated with TTU.
+        </div>
+        <div class="footer-center">
+            <p>&copy; 
+                <script>document.write(new Date().getFullYear());</script> 
+                <a href="https://smithjesko.com/" target="_blank">Smith Jesko</a> - All Rights Reserved
+            </p>
+        </div>
+        <div class="footer-right">
+            <ul>
+                <li><a href="terms-of-service/">Terms of Service</a></li>
+                <li><a href="https://github.com/SmithJesko/ttu-covid-19-tracker">View Code</a></li>
+                <li><a href="report-a-bug/ttu-covid-19-tracker">Report a Bug</a></li>
+            </ul>
+        </div>
+    </div>
+</footer> 
+
+<!-- <script>
+var dates = "{{ dates | safe }}";
+var data_set = "{{ data | safe }}";
+
+var config = {
+		type: 'line',
+		data: {
+			labels: dates,
+			datasets: [{
+				label: 'My First dataset',
+				backgroundColor: window.chartColors.red,
+				borderColor: window.chartColors.red,
+				fill: false,
+				data: data_set
+			}]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: 'Chart.js Line Chart - Logarithmic'
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+				}],
+				yAxes: [{
+					display: true,
+					type: 'logarithmic',
+				}]
+			}
+		}
+	};
+
+	window.onload = function() {
+		var ctx = document.getElementById('canvas').getContext('2d');
+		window.myLine = new Chart(ctx, config);
+	};
+</script> -->
+
+<script>
+    var dates = {{ dates | safe }};
+    var data_set = {{ data | safe }};
+
+    var dates_clean = []
+    var data_set_clean = []
+
+    var i;
+    for (i = 0; i < dates.length; i++) {
+        dates_clean.push(dates[i])
+    }
+    console.log(dates)
+
+    var config = {
+		type: 'line',
+        data: {
+        labels: dates,
+        datasets: [{
+            label: 'Total Reported Cases',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            borderColor: 'rgb(255, 0, 0)',
+            data: data_set
+            }]
+        },
+
+        options: {
+            responsive: true,
+            legend: {
+                labels: {
+                    fontColor: "#fff",
+                    fontSize: 14
+                },
+            },
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        zeroLineColor: '#666',
+                        color: '#666'
+                    },
+                    ticks: {
+                        fontColor: "#fff",
+                        fontSize: 11
+                    },
+                }],
+                xAxes: [{
+                    gridLines: {
+                        zeroLineColor: '#666',
+                        color: '#666'
+                    },
+                    ticks: {
+                        fontColor: "#fff",
+                        fontSize: 11
+                    },
+                }]
+            },
+        }
+	};
+
+	window.onload = function() {
+		var ctx = document.getElementById('canvas').getContext('2d');
+		window.myLine = new Chart(ctx, config);
+	};
+</script>
 {% endblock content %}
 

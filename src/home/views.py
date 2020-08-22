@@ -20,9 +20,34 @@ def index(request):
     if report_date > datetime.now().strftime('%B %#d, %Y'):
         get_case_report()
         print('got report')
-        return render(request, 'home/index.html', {})
     else:
+        # get_case_report()
         print('report up to date')
-        return render(request, 'home/index.html', {})
 
-    return render(request, 'home/index.html', {})
+    cases = Cases.objects.latest('id')
+
+    dates = []
+    data = []  
+
+    weekly_cases = Cases.objects.order_by('id')[:7]
+    for case in weekly_cases:
+        dates.append(case.report_date)
+        data.append(case.total_active)
+
+    context = {
+        'dates': dates,
+        'data': data,
+        'date': cases.report_date,
+        'updated': cases.name[31:],
+        'students_reported': cases.students_reported,
+        'students_recovered': cases.students_recovered,
+        'students_active': cases.students_active,
+        'faculty_reported': cases.faculty_reported,
+        'faculty_recovered': cases.faculty_recovered,
+        'faculty_active': cases.faculty_active,
+        'total_reported': cases.total_reported,
+        'total_recovered': cases.total_recovered,
+        'total_active': cases.total_active,
+    }
+
+    return render(request, 'home/index.html', context)
